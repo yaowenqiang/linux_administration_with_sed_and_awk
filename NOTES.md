@@ -38,6 +38,18 @@ grep -c '' /etc/services
 
 > grep 'pam_motd' /etc/pam.d/*
 > rg 'pam_motd' /etc/pam.d/*
+> grep -l 'pam_motd' /etc/pam.d/*
 
+> man pam_motd
+
+> vim /etc/ssh/motd
+
+> If you don't belong, don't stay
+
+> vim /etc/pam.d/sshd
+
+> motd
+
+> !! 
 
 
