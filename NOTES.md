@@ -52,4 +52,48 @@ grep -c '' /etc/services
 
 > !! 
 
+## IFS
+
+> The default internal field separator(IFS) is white space. With a single space separated file, we can use the read command to populate the three fields used
+
+
+```bash
+echo 'Fred 23 Sales' >> employees.txt
+echo 'Rahinda 22 It' >> employees.txt
+while read name age dept; do
+echo $name
+echo $age
+echo $dept
+done < employees.txt
+
+tr ' ' ',' < employees.txt >employees.csv
+
+OLDIFS="$IFS"
+IFS=','
+while read namge age dept; do
+echo $name
+echo $age
+echo $dept
+
+done < employees.csv
+
+IFS="$OLDIFS"
+```
+
+### /etc/passwd
+
+
+```bash
+OLDIFS="$IFS"
+IFS=':'
+while read n p u g c d st; do
+echo -e "User:$n\n\tPass:$p\n\tUID: $u\n\tGID:$g\n\tComment:$c`n\tHOME:$d\n\tShELL:$s"
+
+done < /etc/passwd
+
+IFS="$OLDIFS"
+
+```
+
+## The stream editor
 
