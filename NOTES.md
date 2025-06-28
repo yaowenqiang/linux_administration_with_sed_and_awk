@@ -97,3 +97,19 @@ IFS="$OLDIFS"
 
 ## The stream editor
 
+```bash
+
+
+# line numbers
+sed -n '1p' /etc/passwd
+sed -n '$p' /etc/passwd
+sed -n '20,$p' /etc/passwd
+sed -n '20,22p' /etc/passwd
+
+# appending
+
+sed '$a 8.8.8.8 google ' /etc/hosts
+sed -i '$a 8.8.8.8 google ' /etc/hosts
+
+```
+
