@@ -111,5 +111,54 @@ sed -n '20,22p' /etc/passwd
 sed '$a 8.8.8.8 google ' /etc/hosts
 sed -i '$a 8.8.8.8 google ' /etc/hosts
 
+# delete last line
+sed '$d' /etc/hosts
+
+# insert before first line
+
+sed '1i hello' /etc/hosts
+
+# this will fail
+sudo echo '8.8.8.8 google' >> /etc/hosts
+
+vim +1 file
+nvim +1 file
+
+nvim +$ file
+
+
 ```
 
+## Using Strings and Regular Expressions
+
+```bash
+apt install git
+apt install git
+zypper in git-core
+
+sed -n '/ServerNmae/p' vhost.template         
+
+sed -i 's/dummy-host.example.com/www.example.com/p' vhost.template 
+
+sed -E '/^(#|$)/d' vhost.template
+sed -E '/^\s*(#|$)/d' vhost.template
+sed -E '/^\s*(#|$)/d' vhost.template > ./vhost.template1
+
+vim +/ServiceNae/ mvhost.template
+
+alias cleanfile="sed -E '/^\s*(#|$)/d' "
+
+cleanfile chrony.conf
+
+unalias cleanfile
+
+
+
+```
+
+### Prniting Blockso Text
+
+```bash
+
+sed -n '/<directory/,/<\/Directory/p' vhost.template
+```
