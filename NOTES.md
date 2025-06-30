@@ -161,4 +161,17 @@ unalias cleanfile
 ```bash
 
 sed -n '/<directory/,/<\/Directory/p' vhost.template
+sed -nE  "/<Directory/,/<\/Directory/p" vhost.template  | sed -E '/^\s*(#|$)/d'
+
+```
+```bash
+#!/bin/bash
+for i in ~/test/sed-ad-awk/scripts/*.sh;do
+firstline=$(sed -n '10' $f)
+if [[ \firstline ！= ’#!'* ]]; then
+    echo 'Adding shebang to $f'
+    sed -i '1i #!/bin/bash' $f
+fi
+done
+
 ```
