@@ -165,13 +165,15 @@ sed -nE  "/<Directory/,/<\/Directory/p" vhost.template  | sed -E '/^\s*(#|$)/d'
 
 ```
 ```bash
-#!/bin/bash
-for i in ~/test/sed-ad-awk/scripts/*.sh;do
-firstline=$(sed -n '10' $f)
-if [[ \firstline ！= ’#!'* ]]; then
-    echo 'Adding shebang to $f'
-    sed -i '1i #!/bin/bash' $f
-fi
+for f in ~/Code/linux_project/sed-and-awk/scripts/*.sh;do
+  firstline=$(sed -n '1p' $f)
+  if [[ $firstline != "#!"* ]]; then
+      echo "Adding shebang to $f"
+      sed -i '1i #!/bin/bash' $f
+  fi
 done
 
 ```
+
+### Using sed files
+
