@@ -50,7 +50,7 @@ grep -c '' /etc/services
 
 > motd
 
-> !! 
+> !!
 
 ## IFS
 
@@ -136,9 +136,9 @@ apt install git
 apt install git
 zypper in git-core
 
-sed -n '/ServerNmae/p' vhost.template         
+sed -n '/ServerNmae/p' vhost.template
 
-sed -i 's/dummy-host.example.com/www.example.com/p' vhost.template 
+sed -i 's/dummy-host.example.com/www.example.com/p' vhost.template
 
 sed -E '/^(#|$)/d' vhost.template
 sed -E '/^\s*(#|$)/d' vhost.template
@@ -177,3 +177,9 @@ done
 
 ### Using sed files
 
+```bash
+sed '/^$/d;/^#/d' sshd_config
+
+sed -f simple.sed sshd_config
+
+```
