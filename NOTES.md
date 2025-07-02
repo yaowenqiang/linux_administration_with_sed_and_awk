@@ -181,5 +181,6 @@ done
 sed '/^$/d;/^#/d' sshd_config
 
 sed -f simple.sed sshd_config
+sed -f simple.sed  -i.bak sshd_config
 
 ```
