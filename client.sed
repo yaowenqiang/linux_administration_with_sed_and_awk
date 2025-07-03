@@ -1,6 +1,6 @@
 #!/bin/sed -Ef
 
-/ClientAlivetInterval/ {
+/ClientAliveInterval/ {
     s/^(ClientAlivetInterval).*$/\1 60/
     t count
     s/.*/ClientAlivetInterval 60/
@@ -8,7 +8,7 @@
 }
 :count
 /ClientAliveCountMax/  {
-    s/^(ClientAliveCountMax).*$//\1 3/
+    s/^(ClientAliveCountMax).*$/\1 3/
     t del
     s/.*/ClientAliveCountMax 3/
     t del

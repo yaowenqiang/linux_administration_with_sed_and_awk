@@ -184,3 +184,25 @@ sed -f simple.sed sshd_config
 sed -f simple.sed  -i.bak sshd_config
 
 ```
+
+```sed
+
+#!/bin/sed -Ef
+
+/ClientAliveInterval/ {
+    s/^(ClientAlivetInterval).*$/\1 60/
+    t count # t means move to
+    s/.*/ClientAlivetInterval 60/
+    t count
+}
+:count
+/ClientAliveCountMax/  {
+    s/^(ClientAliveCountMax).*$/\1 3/
+    t del
+    s/.*/ClientAliveCountMax 3/
+    t del
+}
+
+:del
+/^(#|$)/d
+```
