@@ -206,3 +206,20 @@ sed -f simple.sed  -i.bak sshd_config
 :del
 /^(#|$)/d
 ```
+···bash
+echo '127.0.0.1' > server.txt
+while read server； do
+echo $Starting work on $server"
+ssh -n -C -o StrictHostKeyChecking=no $server "sudo sed -Ei.$(date +%F) '/(#|$)/d' /etc/ssh/sshd_config"
+echo "Finished work on $server"
+done < server.txt
+```
+
+### Remote SSH Commands
+
+Using ssh and -C we can execute commands remotely without the need of an interactive session. The option -n is used to redirect stdin to /dev/null, allowing remote execution of commands on more than one server
+
+
+```bash
+ssh -n -o StrictHostKeyChecking=no
+```
