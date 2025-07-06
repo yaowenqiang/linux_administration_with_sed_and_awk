@@ -223,3 +223,76 @@ Using ssh and -C we can execute commands remotely without the need of an interac
 ```bash
 ssh -n -o StrictHostKeyChecking=no
 ```
+
+## Awk 
+
+```bash
+awk -F: '{print $0}' /etc/passwd
+awk -F: '{print NR ":" $0}' /etc/passwd
+awk -F: '/bash$/{print NR ":" $0}' /etc/passwd
+awk -F: '/bash$/{printf "%2d%s%s\n", NR, ": ", $0}' /etc/passwd
+awk -F: '/bash$/{printf "%2d%s%s%6d\n", NR, ": ", $1, $3}' /etc/passwd
+awk -F: '{printf "%2d%s%22s%6d\n", NR, ": ", $1, $3}' /etc/passwd
+awk 'BEGIN{FS=":"; printf "%4s%20s%6s\n", "Num:", "Username", "UUID"} {printf "%2d%s%22s%6d\n", NR, ": ", $1, $3}' /etc/passwd
+
+awk 'BEGIN{FS=":"; printf "%4s%20s%6s\n", "Num:", "Username", "UUID"; COUNT=0} {COUNT++;printf "%2d%s%22s%6d\n", NR, ": ", $1, $3}' /etc/passwd
+
+awk 'BEGIN{FS=":"; printf "%4s%20s%6s\n", "Num:", "Username", "UUID";COUNT=0} !/^#/{COUNT++;printf "%4s%s%22s%6d\n", COUNT, ": ", $1, $3}' /etc/passwd
+
+awk 'BEGIN{FS=":"; printf "%4d%20s%6s\n", "Num:", "Username", "UUID";COUNT=0} !/^#/{COUNT++;printf "%4d%s%22s%6d\n", COUNT, ": ", $1, $3} END {print "We have " NR " users, of which " COUNT " use BASH"}' /etc/passwd
+
+```
+
+print will add a newline
+printf should add a '\n'
+
+### awk file
+
+```awk
+# test.awk
+
+BEGIN {
+  print "This is the start"
+}
+{
+  print $0;
+}
+
+END {
+  print "This is the end"
+}
+
+```
+
+```bash
+
+awk -f test.awk /etc/passwd
+
+
+```
+
+### lastlog formatting
+
+exclude certain lines from being processed
+
+
+```awk
+!(/Never logged in/ || /^Username/ || /^root/ ) {
+
+}
+
+```
+
+```bash
+chmod +x lastlog.awk
+lastlog | ./lastlog.awk
+
+```
+
+## Filtering Data from Differing Text File Formats
+
+
+```bash
+awk 'BEGIN {FS=":"; OFS=","}{print $1, $3, $4, $6, $7}' /etc/passwd
+
+```
