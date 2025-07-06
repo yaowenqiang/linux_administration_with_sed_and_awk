@@ -296,3 +296,70 @@ lastlog | ./lastlog.awk
 awk 'BEGIN {FS=":"; OFS=","}{print $1, $3, $4, $6, $7}' /etc/passwd
 
 ```
+
+
+```bash
+awk -f -v pattern=root passwd2yaml.awk
+# v menas variable pattern is the name of the variables
+
+```
+
+```bash
+# append a newline to </VirtualHost
+/a \ 
+sed -E  '/^\s*$/d;/^<\/Virt/a \ ' vh.conf
+
+
+```
+
+### Working with the RS Variable
+
+The variable RS is the record separator, This is normally a new line, but we wnat to be the extra new line  between each virtual host record
+
+
+> brew install gawk
+> awk -v pattern=example  -f virtualhost.awk vh.conf
+
+## Read data from log files
+
+### journalctl
+
+```
+journalctl -u ssh
+journalctl -u ssh -g 'Failed password for invalid user'
+journalctl -u ssh -g 'Failed password for root from '
+
+```
+> journalctl -u ssh | awk -f ssh-dimple.awk
+> journalctl -u ssh | awk -f ssh-dimple.awk | sort -u
+
+
+### Sorting Using AWK
+
+The asorti function is an internal function in awk that sorts the indices of an array numerically or lexicographically and returns the number of elements in the sorted way
+
+> vim 
+> set bg=dark
+
+
+
+## Blocking IPs
+
+if you want to assume theses Ip address should not be on our system we could block each IP with a firewall. We may want to double check that our own IP is not included. but this shows the use of AWK and filtering
+
+
+
+```bash
+
+
+suso apt install firewalld
+
+for i in $(sudo journalctl -u ssh | awk -f ssh-final.awk); do
+    sudo firewall-cmd --zone=drop --add-source=$i
+done
+
+firewall-cmd --zone=drop --list-all
+
+```
+
+
